@@ -11,10 +11,12 @@ import (
 )
 
 var (
+	mode         = flag.String("mode", "pandoc", "转换工具或接口类型")
 	markdownPath = flag.String("path", "", "markdown文件路径或目录,默认当前目录下的md文件")
 	storePath    = flag.String("store", "", "文件转换后的保存目录,默认和源文件同一路径")
 	target       = flag.String("target", "html", "要转换的目标文件格式[html]")
 	distName     = flag.String("name", "", "输出的文件名")
+	pandoc       = flag.String("pandoc", "pandoc.exe", "pandoc文件路径")
 )
 
 func main() {
@@ -87,11 +89,22 @@ func buildTransInfo(md string, useDistName bool) TransInfo {
 
 func dotrans(transinfo TransInfo) {
 	trans := getTransform(transinfo)
+	if nil == trans {
+		fmt.Println(E7)
+		shutdown()
+	}
 	transinfo.DistContent = trans.MarkDownTrans(transinfo)
 	trans.Save(transinfo)
 }
 
 func getTransform(transInfo TransInfo) Transform {
+	if *mode == "pandoc" {
+		if !exist(*pandoc) {
+			fmt.Println(E6, *pandoc)
+			return nil
+		}
+		return PandocTrans{PandocPath: *pandoc, DistType: transInfo.DistType}
+	}
 	switch transInfo.DistType {
 	case "html":
 		return HTMLTrans{APIPath: "https://api.github.com/markdown/raw"}
@@ -105,4 +118,13 @@ func getTransform(transInfo TransInfo) Transform {
 //shutdown 强制关闭程序
 func shutdown() {
 	os.Exit(-1)
+}
+
+//exist 文件是否存在
+func exist(p string) bool {
+	_, e := os.Stat(p)
+	if nil == e {
+		return true
+	}
+	return false
 }

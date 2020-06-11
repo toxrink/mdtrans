@@ -15,4 +15,6 @@ mdtrans.exe [参数[值]]
   -store       文件转换后的保存目录,默认和源文件同一路径
   -target      要转换的目标文件格式,默认html
   -name        输出的文件名(store为目录时无效)
+  -mode        转换工具或接口类型,默认pandoc
+  -pandoc      pandoc文件路径,默认pandoc.exe
 ```

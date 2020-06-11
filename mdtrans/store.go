@@ -10,5 +10,5 @@ func write(content []byte, dist string) {
 	if nil != err {
 		fmt.Println(E1, err)
 	}
-	fmt.Println(dist)
+	fmt.Println("save to", dist)
 }

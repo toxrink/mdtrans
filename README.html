@@ -1,18 +1,8 @@
-package mdtrans
-
-//PageTplInfo 模板属性
-type PageTplInfo struct {
-	Title string
-	Body  string
-}
-
-const (
-	//PageTpl 页面模板
-	PageTpl = `<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>{{ .Title }}</title>
+	<title>README.html</title>
 	<style type="text/css">
 	body {
 		color: #000;
@@ -653,14 +643,27 @@ const (
     }
     .properties {
         color: #333;
-	}
-	.sourceCode .xml .kw {
-        color: #df5000;
     }
 	</style>
 	
 	</head>
-	<body class="markdown-body">{{ .Body }}</body>
+	<body class="markdown-body"><h1 id="md文件转换工具">md文件转换工具</h1>
+<ul>
+<li><p>支持转换目标文件类型</p>
+<ul>
+<li>HTML</li>
+</ul></li>
+<li><p>使用说明</p></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">mdtrans.exe</span> [参数[值]]</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">参数列表</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="ex">-path</span>        markdown文件路径或目录,默认当前目录下的md文件</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="ex">-store</span>       文件转换后的保存目录,默认和源文件同一路径</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="ex">-target</span>      要转换的目标文件格式,默认html</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="ex">-name</span>        输出的文件名(store为目录时无效)</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="ex">-mode</span>        转换工具或接口类型,默认pandoc</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="ex">-pandoc</span>      pandoc文件路径,默认pandoc.exe</a></code></pre></div>
+</body>
 </html>	
-`
-)

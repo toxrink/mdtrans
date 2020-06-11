@@ -17,4 +17,8 @@ var (
 	E4 = ErrorCode{Code: 1003, Info: "目标文件或目录不存在"}
 	//E5 错误代码
 	E5 = ErrorCode{Code: 1004, Info: "未知的目标文件类型"}
+	//E6 错误代码
+	E6 = ErrorCode{Code: 1005, Info: "pandoc.exe文件路径错误"}
+	//E7 错误代码
+	E7 = ErrorCode{Code: 1007, Info: "trans类型为nil"}
 )
