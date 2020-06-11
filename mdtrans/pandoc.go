@@ -21,7 +21,7 @@ type PandocTrans struct {
 //MarkDownTrans md转html
 func (trans PandocTrans) MarkDownTrans(transInfo TransInfo) []byte {
 	fmt.Printf("transform markdown file %s\n", transInfo.SrcPath)
-	distPath := os.TempDir() + string(filepath.Separator) + transInfo.DistName
+	distPath := os.TempDir() + string(filepath.Separator) + transInfo.DistName + "." + transInfo.TimeStamp
 	cmd := exec.Command(trans.PandocPath, transInfo.SrcPath, "-o", distPath)
 	cmd.Run()
 
@@ -30,7 +30,7 @@ func (trans PandocTrans) MarkDownTrans(transInfo TransInfo) []byte {
 
 	scanner := bufio.NewScanner(file)
 
-	buf := bytes.NewBuffer(make([]byte, 0, 1024))
+	buf := bytes.NewBuffer(make([]byte, 0, 1048576))
 	writer := bufio.NewWriter(buf)
 
 	r, _ := regexp.Compile("id=\"([^\"]+)\"")
@@ -48,7 +48,7 @@ func (trans PandocTrans) MarkDownTrans(transInfo TransInfo) []byte {
 		writer.WriteString(t)
 		writer.WriteRune('\n')
 	}
-
+	writer.Flush()
 	return buf.Bytes()
 }
 

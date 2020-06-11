@@ -11,6 +11,7 @@ type TransInfo struct {
 	DistDir     string
 	DistType    string
 	DistContent []byte
+	TimeStamp   string
 }
 
 //Transform md文件转换

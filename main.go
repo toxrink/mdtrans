@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 var (
@@ -61,6 +62,7 @@ func isMdFile(name string) bool {
 
 func buildTransInfo(md string, useDistName bool) TransInfo {
 	ti := TransInfo{}
+	ti.TimeStamp = getTimestamp()
 
 	fi, _ := os.Stat(md)
 	ti.SrcName = fi.Name()
@@ -127,4 +129,8 @@ func exist(p string) bool {
 		return true
 	}
 	return false
+}
+
+func getTimestamp() string {
+	return time.Now().Format("20060102150405")
 }
